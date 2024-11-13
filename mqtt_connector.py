@@ -25,7 +25,7 @@ def on_message(client, userdata, msg):
 
         print(f"Procesado - Device ID: {device_id}, Data Type: {data_type}, Value: {value}")
 
-        # Llamar a la función para almacenar en la base de datos
+        # Almacenar en la base de datos
         store_data_in_db(device_id, data_type, value)
     except json.JSONDecodeError:
         print("Error al decodificar el mensaje JSON.")
