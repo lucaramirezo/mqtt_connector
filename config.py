@@ -1,16 +1,16 @@
 # Configuración del broker MQTT
-MQTT_BROKER = "localhost"
-MQTT_PORT = 1883
-MQTT_USER = None  # Sin usuario y contraseña para pruebas locales
-MQTT_PASSWORD = None
-MQTT_CA_FILE = None  # No necesario pruebas locales
+MQTT_BROKER = "iot.protonenergyindustries.com"  # Dirección del broker
+MQTT_PORT = 8883  # Puerto para MQTTS (TLS/SSL)
+MQTT_USER = "luca"  # Usuario MQTT
+MQTT_PASSWORD = "daA67j2.ahd72jBSAaoasljhf.aAdwAW"  # Contraseña MQTT
+MQTT_CA_FILE = "private/ca.crt"  # Ruta al certificado CA para TLS/SSL
 
 # Configuración de la base de datos PostgreSQL
 DB_HOST = "localhost"
 DB_PORT = 5432
 DB_NAME = "postgres"  # !!
 DB_USER = "postgres"
-DB_PASSWORD = "Familiaramirez4"
+DB_PASSWORD = "password"
 
 # Lista de UUID válidos para testing
 VALID_DEVICE_IDS = [

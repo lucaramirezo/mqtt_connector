@@ -2,9 +2,9 @@ import json
 import paho.mqtt.client as mqtt
 import random
 import time
-from config import MQTT_BROKER, MQTT_PORT, DATA_TYPE_MAP, VALID_DEVICE_IDS
+from config import MQTT_BROKER, MQTT_PORT, MQTT_USER, MQTT_PASSWORD, MQTT_CA_FILE, VALID_DEVICE_IDS, DATA_TYPE_MAP
 
-TOPIC = "sensors/test"
+TOPIC = "/test"
 
 # Función para simular datos de sensores en JSON
 def simulate_sensor_data():
@@ -21,7 +21,17 @@ def simulate_sensor_data():
 
     return payload
 
+# Configuración del cliente MQTT
 client = mqtt.Client()
+
+# Autenticación con usuario y contraseña
+client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
+
+# Configuración del certificado CA para TLS/SSL
+if MQTT_CA_FILE:
+    client.tls_set(MQTT_CA_FILE)
+
+# Conectar al broker
 client.connect(MQTT_BROKER, MQTT_PORT, 60)
 
 try:

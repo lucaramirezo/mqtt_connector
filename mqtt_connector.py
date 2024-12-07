@@ -1,7 +1,7 @@
 import json
 import paho.mqtt.client as mqtt
 from DDBB import store_data_in_db
-from config import MQTT_BROKER, MQTT_PORT, MQTT_USER, MQTT_PASSWORD
+from config import MQTT_BROKER, MQTT_PORT, MQTT_USER, MQTT_PASSWORD, MQTT_CA_FILE
 
 # Función para manejar la conexión al broker
 def on_connect(client, userdata, flags, rc):
@@ -37,7 +37,15 @@ def on_message(client, userdata, msg):
 
 # Configuración y conexión al broker MQTT
 client = mqtt.Client()
+
+# Autenticación con usuario y contraseña
 client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
+
+# Configuración TLS/SSL con el archivo CA, si está disponible
+if MQTT_CA_FILE:
+    client.tls_set(MQTT_CA_FILE)
+
+# Callback para conexión y mensajes
 client.on_connect = on_connect
 client.on_message = on_message
 

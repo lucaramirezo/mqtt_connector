@@ -3,7 +3,7 @@ import time
 import paho.mqtt.client as mqtt
 from tmp117_reader import TMP117Reader
 import pigpio
-from config import MQTT_BROKER, MQTT_PORT, VALID_DEVICE_IDS
+from config import MQTT_BROKER, MQTT_PORT, MQTT_USER, MQTT_PASSWORD, MQTT_CA_FILE, VALID_DEVICE_IDS
 
 TOPIC = "sensors/test"  # Tópico para publicar los datos
 
@@ -22,13 +22,22 @@ def main():
 
     # Inicializa el cliente MQTT
     client = mqtt.Client()
-    client.connect(MQTT_BROKER, MQTT_PORT, 60)
+
+    # Autenticación con usuario y contraseña
+    client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
+
+    # Configuración TLS/SSL si se proporciona un archivo CA
+    if MQTT_CA_FILE:
+        client.tls_set(MQTT_CA_FILE)
 
     try:
+        # Conectar al broker MQTT
+        client.connect(MQTT_BROKER, MQTT_PORT, 60)
+
         while True:
             for i, handler in enumerate(reader.i2c_handlers):
                 try:
-                    # Leer la temperatura del sensores
+                    # Leer la temperatura del sensor
                     temperature = reader.read_temperature(handler)
                     if temperature is None:
                         raise ValueError("Datos no válidos")
