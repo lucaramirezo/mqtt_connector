@@ -1,7 +1,7 @@
 import psycopg2
 from config import DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
 
-def store_data_in_db(device_id, data_type, value):
+def store_data_in_db(device_id, data_type, sensor_location, value):
     try:
         # Conexión a PostgreSQL
         print("Conectando a la base de datos PostgreSQL...")
@@ -19,7 +19,7 @@ def store_data_in_db(device_id, data_type, value):
         INSERT INTO neverasV1.sensor_data_entry (device_id, data_type, value, sub_type, sensor_location)
         VALUES (%s, %s, %s, %s, %s);
         """
-        cursor.execute(insert_query, (device_id, data_type, value, None, None))
+        cursor.execute(insert_query, (device_id, data_type, value, None, sensor_location))
         conn.commit()
 
         print("Datos insertados en la base de datos con éxito.")

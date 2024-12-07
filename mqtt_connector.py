@@ -21,12 +21,13 @@ def on_message(client, userdata, msg):
         data = json.loads(payload)
         device_id = data['device_id']
         data_type = data['data_type']
+        sensor_location = data['sensor_location']
         value = float(data['value'])  # Convertir el valor a float para el campo REAL en la base de datos
 
-        print(f"Procesado - Device ID: {device_id}, Data Type: {data_type}, Value: {value}")
+        print(f"Procesado - Device ID: {device_id}, Data Type: {data_type}, Location: {sensor_location}, Value: {value}")
 
         # Almacenar en la base de datos
-        store_data_in_db(device_id, data_type, value)
+        store_data_in_db(device_id, data_type, sensor_location, value)
     except json.JSONDecodeError:
         print("Error al decodificar el mensaje JSON.")
     except KeyError as e:

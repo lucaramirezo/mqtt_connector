@@ -10,7 +10,7 @@ DB_HOST = "localhost"
 DB_PORT = 5432
 DB_NAME = "postgres"  # !!
 DB_USER = "postgres"
-DB_PASSWORD = "password"
+DB_PASSWORD = "Familiaramirez4"
 
 # Lista de UUID válidos para testing
 VALID_DEVICE_IDS = [

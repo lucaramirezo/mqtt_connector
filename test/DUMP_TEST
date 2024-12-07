@@ -1,0 +1,16 @@
+-- Insertar clientes de prueba
+INSERT INTO neverasV1.CLIENT (name, email, phone_1, address, city, company_name, NIF, zip_code)
+VALUES
+    ('Cliente A', 'clienteA@example.com', '123456789', 'Calle 123', 'Ciudad A', 'Empresa A', 'A12345678', '28001'),
+    ('Cliente B', 'clienteB@example.com', '987654321', 'Calle 456', 'Ciudad B', 'Empresa B', 'B87654321', '28002'),
+    ('Cliente C', 'clienteC@example.com', '555555555', 'Calle 789', 'Ciudad C', 'Empresa C', 'C11223344', '28003');
+
+-- Insertar dispositivos asociados a los clientes
+INSERT INTO neverasV1.DEVICE (client_id, acquisition_date, commercial_name, firmware_version, last_service_date)
+VALUES
+    ((SELECT client_id FROM neverasV1.CLIENT WHERE name = 'Cliente A'), '2023-01-01', 'Sensor Model X', 'v1.0', '2023-06-01'),
+    ((SELECT client_id FROM neverasV1.CLIENT WHERE name = 'Cliente B'), '2023-02-01', 'Sensor Model Y', 'v1.2', '2023-07-01'),
+    ((SELECT client_id FROM neverasV1.CLIENT WHERE name = 'Cliente C'), '2023-03-01', 'Sensor Model Z', 'v1.3', '2023-08-01');
+
+-- Verificar los device_id generados para usarlos en el simulador
+SELECT device_id FROM neverasV1.DEVICE;
