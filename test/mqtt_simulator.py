@@ -4,7 +4,7 @@ import random
 import time
 from config import MQTT_BROKER, MQTT_PORT, MQTT_USER, MQTT_PASSWORD, MQTT_CA_FILE, VALID_DEVICE_IDS, DATA_TYPE_MAP
 
-TOPIC = "/test"
+TOPIC = "/sensors/test"
 
 # Función para simular datos de sensores en JSON
 def simulate_sensor_data():
